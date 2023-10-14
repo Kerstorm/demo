@@ -1,7 +1,7 @@
-package controller;
+package JavaApi1.demo.Pack.controller;
 
 import JavaApi1.demo.Details;
-import model.Members;
+import JavaApi1.demo.Pack.model.Members;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

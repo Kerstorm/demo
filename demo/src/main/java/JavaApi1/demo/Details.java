@@ -1,8 +1,8 @@
 package JavaApi1.demo;
 
-import model.GuildRanks;
-import model.Guilds;
-import model.Members;
+import JavaApi1.demo.Pack.model.GuildRanks;
+import JavaApi1.demo.Pack.model.Guilds;
+import JavaApi1.demo.Pack.model.Members;
 
 import java.text.ParseException;
 import java.util.List;
@@ -21,6 +21,6 @@ public class Details {
         Members members1 = new Members(1, 1, "Прэйли", "Рита", "10.09.2020", GuildRanks.HeadOfTheGuild, true);
         Members members2 = new Members(2, 1, "Trehoux ", "Александр", "10.12.2020", GuildRanks.DeputyGuildHeads, true);
         Members members3 = new Members(3, 1, "GreenMoon", "Александр", "20.08.2022", GuildRanks.GuildOfficer, true);
-        return List.of(members1, members2);
+        return List.of(members1, members2, members3);
     }
 }
