@@ -1,7 +1,7 @@
 package JavaApi1.demo.Pack.controller;
 
 import JavaApi1.demo.Details;
-import JavaApi1.demo.Pack.model.Members;
+import JavaApi1.demo.Pack.model.Member;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,54 +13,54 @@ import java.util.List;
 @RequestMapping("api/members")
 public class MembersController {
 
-    List<Members> membersList = new ArrayList<>();
+    List<Member> membersList = new ArrayList<>();
 
     public MembersController() throws ParseException {
         membersList.addAll(Details.getMembersList());
     }
 
     @GetMapping
-    public List<Members> getMembers() {
+    public List<Member> getMembers() {
         return membersList;
     }
 
-    @GetMapping("/{members_id}")
-    public Members getMembers(@PathVariable("members_id") int membersId) {
+    @GetMapping("/{member_id}")
+    public Member getMembers(@PathVariable("member_id") Integer memberId) {
         return membersList.stream()
-                .filter(members -> members.id() == membersId)
+                .filter(member -> member.id().equals(memberId))
                 .findAny()
                 .orElse(null);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Members createMembers(@RequestBody Members members) {
-        membersList.add(members);
-        return members;
+    public Member createMembers(@RequestBody Member member) {
+        membersList.add(member);
+        return member;
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PutMapping("/{members_id}")
-    public void updateMembers(@RequestBody Members members, @PathVariable("members_id") int membersId) {
-        var exsistingMembers = membersList
+    @PutMapping("/{member_id}")
+    public void updateMembers(@RequestBody Member member, @PathVariable("member_id") Integer memberId) {
+        var exsistingMember = membersList
                 .stream()
-                .filter(x -> x.id() == membersId)
+                .filter(x -> x.id().equals(memberId))
                 .findAny()
                 .orElse(null);
 
-        membersList.remove(exsistingMembers);
-        membersList.add(members);
+        membersList.remove(exsistingMember);
+        membersList.add(member);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/{members_id}")
-    public void deleteMembers(@PathVariable("members_id") int membersId) {
-        var exsistingMembers = membersList
+    @DeleteMapping("/{member_id}")
+    public void deleteMembers(@PathVariable("member_id") Integer memberId) {
+        var exsistingMember = membersList
                 .stream()
-                .filter(x -> x.id() == membersId)
+                .filter(x -> x.id().equals(memberId))
                 .findAny()
                 .orElse(null);
 
-        membersList.remove(exsistingMembers);
+        membersList.remove(exsistingMember);
     }
 }

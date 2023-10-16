@@ -1,8 +1,8 @@
 package JavaApi1.demo.Pack.controller;
 
 import JavaApi1.demo.Details;
-import JavaApi1.demo.Pack.model.Guilds;
-import JavaApi1.demo.Pack.model.Members;
+import JavaApi1.demo.Pack.model.Guild;
+import JavaApi1.demo.Pack.model.Member;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,66 +14,66 @@ import java.util.List;
 @RequestMapping("api/guilds")
 public class GuildsController {
 
-    List<Guilds> guildsList = new ArrayList<>();
+    List<Guild> guildsList = new ArrayList<>();
 
     public GuildsController() throws ParseException {
         guildsList.addAll(Details.getGuildsList());
     }
 
     @GetMapping
-    public List<Guilds> getGuilds() {
+    public List<Guild> getGuild() {
         return guildsList;
     }
 
-    @GetMapping("/{guilds_id}")
-    public Guilds getGuilds(@PathVariable("guilds_id") int guildsId) {
+    @GetMapping("/{guild_id}")
+    public Guild getGuilds(@PathVariable("guild_id") Integer guildId) {
         return guildsList
                 .stream()
-                .filter(guilds -> guilds.id() == guildsId)
+                .filter(guild -> guild.id().equals(guildId))
                 .findAny()
                 .orElse(null);
     }
 
-    @GetMapping("/{guilds_id}/members")
-    public List<Members> getMembersByGuildsId(@PathVariable("guilds_id") int guildsId) throws ParseException {
-        List<Members> membersList = Details.getMembersList();
+    @GetMapping("/{guild_id}/members")
+    public List<Member> getMembersByGuildsId(@PathVariable("guild_id") Integer guildId) throws ParseException {
+        List<Member> membersList = Details.getMembersList();
         return membersList
                 .stream()
-                .filter(members -> members.GuildId() == guildsId)
+                .filter(members -> members.guildId().equals(guildId))
                 .toList();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Guilds createGuilds(@RequestBody Guilds guilds) {
+    public Guild createGuild(@RequestBody Guild guilds) {
         guildsList.add(guilds);
         return guilds;
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PutMapping("/{guilds_id}")
-    public void updateGuilds(@RequestBody Guilds guilds, @PathVariable("guilds_id") int guildsId) {
-        var exsistingGuilds = guildsList
+    @PutMapping("/{guild_id}")
+    public void updateGuild(@RequestBody Guild guild, @PathVariable("guild_id") Integer guildId) {
+        var exsistingGuild = guildsList
                 .stream()
-                .filter(x -> x.id() == guildsId)
+                .filter(x -> x.id().equals(guildId))
                 .findAny()
                 .orElse(null);
 
-        guildsList.remove(exsistingGuilds);
-        guildsList.add(guilds);
+        guildsList.remove(exsistingGuild);
+        guildsList.add(guild);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/{guilds_id}")
-    public void deleteGuilds(@PathVariable("guilds_id") int guildsId) {
-        var exsistingGuilds = guildsList
+    @DeleteMapping("/{guild_id}")
+    public void deleteGuild(@PathVariable("guild_id") Integer guildId) {
+        var exsistingGuild = guildsList
                 .stream()
-                .filter(x -> x.id() == guildsId)
+                .filter(x -> x.id().equals(guildId))
                 .findAny()
                 .orElse(null);
 
-        if (exsistingGuilds != null) {
-            guildsList.remove(exsistingGuilds);
+        if (exsistingGuild != null) {
+            guildsList.remove(exsistingGuild);
         }
     }
 }
