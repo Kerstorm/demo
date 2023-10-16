@@ -13,7 +13,7 @@ public class Details {
         Guilds guild1 = new Guilds(1, "Medwedi", "10.04.2020", 190, false);
         Guilds guild2 = new Guilds(2, "Prets", "03.03.2018", 200, true);
         Guilds guild3 = new Guilds(3, "Кильки", "28.08.2017", 150, true);
-        Guilds guild4 = new Guilds(4, "WhiteRavens", "01.09.2001", 200, true);
+        Guilds guild4 = new Guilds(4, "WhiteRavens", "01.09.2015", 200, true);
         return List.of(guild1, guild2, guild3, guild4);
     }
 
