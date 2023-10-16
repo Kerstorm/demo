@@ -29,7 +29,7 @@ public class GuildsController {
     public Guilds getGuilds(@PathVariable("guilds_id") int guildsId) {
         return guildsList
                 .stream()
-                .filter(guilds ->guilds.id() == guildsId)
+                .filter(guilds -> guilds.id() == guildsId)
                 .findAny()
                 .orElse(null);
     }
