@@ -2,6 +2,7 @@ package JavaApi1.demo.Pack.controller;
 
 import JavaApi1.demo.Pack.model.Member;
 import JavaApi1.demo.repos.members.member_repo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class MembersController {
     private final member_repo repository;
 
-
+    @Autowired
     public MembersController(member_repo repository) throws ParseException {
         this.repository = repository;
     }

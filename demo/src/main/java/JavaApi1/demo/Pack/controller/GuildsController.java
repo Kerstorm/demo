@@ -3,6 +3,7 @@ package JavaApi1.demo.Pack.controller;
 import JavaApi1.demo.Pack.model.Guild;
 import JavaApi1.demo.Pack.model.Member;
 import JavaApi1.demo.repos.guilds.guild_db;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ import java.util.List;
 public class GuildsController {
     private final guild_db repository;
 
+    @Autowired
     public GuildsController(guild_db repository) throws ParseException {
         this.repository = repository;
     }
