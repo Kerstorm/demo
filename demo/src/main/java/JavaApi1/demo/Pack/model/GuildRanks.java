@@ -17,6 +17,9 @@ public enum GuildRanks {
     public int getId() {
         return id;
     }
-    GuildRanks(Integer id){ this.id = id;}
+
+    GuildRanks(Integer id) {
+        this.id = id;
+    }
 }
 
