@@ -1,9 +1,9 @@
 package JavaApi1.demo.repos.guilds;
 
-import JavaApi1.demo.exceptions.exceptions;
-import org.springframework.beans.factory.annotation.Autowired;
 import JavaApi1.demo.Pack.model.Guild;
 import JavaApi1.demo.Pack.model.Member;
+import JavaApi1.demo.exceptions.NotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -51,7 +51,7 @@ public class guild_db implements guildrepo {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM GUILDS WHERE GUILD_ID = ?", rowMapper, guildId);
         } catch (EmptyResultDataAccessException e) {
-            throw new exceptions("Guild with id = [" + guildId + "] not found", e);
+            throw new NotFoundException("Guild with id = [" + guildId + "] not found", e);
         }
     }
 
