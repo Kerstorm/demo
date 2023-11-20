@@ -3,6 +3,7 @@ package JavaApi1.demo.Pack.controller;
 import JavaApi1.demo.Details;
 import JavaApi1.demo.Pack.model.Guild;
 import JavaApi1.demo.Pack.model.Member;
+import JavaApi1.demo.repos.guilds.guild_db;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,67 +14,34 @@ import java.util.List;
 @RestController
 @RequestMapping("api/guilds")
 public class GuildsController {
+    private final guild_db repository;
 
-    List<Guild> guildsList = new ArrayList<>();
-
-    public GuildsController() throws ParseException {
-        guildsList.addAll(Details.getGuildsList());
-    }
+    public GuildsController(guild_db repository) throws ParseException {this.repository = repository;}
 
     @GetMapping
     public List<Guild> getGuild() {
-        return guildsList;
+        return repository.getGuild();
     }
 
     @GetMapping("/{guild_id}")
-    public Guild getGuilds(@PathVariable("guild_id") Integer guildId) {
-        return guildsList
-                .stream()
-                .filter(guild -> guild.id().equals(guildId))
-                .findAny()
-                .orElse(null);
+    public Guild getGuilds(@PathVariable("guild_id") int guildId) {
+        return repository.getGuild(guildId);
     }
 
     @GetMapping("/{guild_id}/members")
-    public List<Member> getMembersByGuildsId(@PathVariable("guild_id") Integer guildId) throws ParseException {
-        List<Member> membersList = Details.getMembersList();
-        return membersList
-                .stream()
-                .filter(members -> members.guildId().equals(guildId))
-                .toList();
+    public List<Member> getMemberByGuildId(@PathVariable("guild_id") int guildId) throws ParseException {
+        return repository.getMemberByGuildId(guildId);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Guild createGuild(@RequestBody Guild guilds) {
-        guildsList.add(guilds);
-        return guilds;
-    }
+    public void createGuild(@RequestBody Guild guild) {repository.createGuild(guild);}
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{guild_id}")
-    public void updateGuild(@RequestBody Guild guild, @PathVariable("guild_id") Integer guildId) {
-        var exsistingGuild = guildsList
-                .stream()
-                .filter(x -> x.id().equals(guildId))
-                .findAny()
-                .orElse(null);
-
-        guildsList.remove(exsistingGuild);
-        guildsList.add(guild);
-    }
+    public void updateGuild(@RequestBody Guild guild, @PathVariable("guild_id") int guildId) {repository.updateGuild(guild, guildId);    }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{guild_id}")
-    public void deleteGuild(@PathVariable("guild_id") Integer guildId) {
-        var exsistingGuild = guildsList
-                .stream()
-                .filter(x -> x.id().equals(guildId))
-                .findAny()
-                .orElse(null);
-
-        if (exsistingGuild != null) {
-            guildsList.remove(exsistingGuild);
-        }
-    }
+    public void deleteGuild(@PathVariable("guild_id") int guildId) {repository.deleteGuild(guildId);}
 }
