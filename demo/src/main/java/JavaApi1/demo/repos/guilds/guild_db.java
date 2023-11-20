@@ -15,17 +15,17 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class guild_db implements guildrepo {
+public class guild_db implements guild_repo {
     private static final String CREATE = """
             INSERT INTO GUILDS (GUILD_ID, TITLE, CREATE_DATE, COUNT_MEMBERS, PVP)
-            VALUES (:GuildId, :Title, :Create_date, :Count_members, :pvp)
+            VALUES (:GuildId, :Title, :Create_date, :Count_members, :PvP)
             """;
 
     private static final String UPDATE = """
             UPDATE GUILDS SET TITLE = :Title,
             CREATE_DATE = :Create_date,
             COUNT_MEMBERS = :Count_members,
-            PVP = :pvp
+            PVP = :PvP
             WHERE GUILD_ID = :GuildId
             """;
 

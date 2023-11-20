@@ -3,7 +3,7 @@ import JavaApi1.demo.Pack.model.Guild;
 import JavaApi1.demo.Pack.model.Member;
 import java.util.List;
 
-public interface guildrepo {
+public interface guild_repo {
     List<Guild> getGuild();
 
     Guild getGuild(int guildId);
