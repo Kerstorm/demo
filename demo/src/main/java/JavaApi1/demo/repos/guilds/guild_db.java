@@ -1,8 +1,8 @@
 package JavaApi1.demo.repos.guilds;
 
+import JavaApi1.demo.exceptions.NotFoundException;
 import JavaApi1.demo.model.Guild;
 import JavaApi1.demo.model.Member;
-import JavaApi1.demo.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.DataClassRowMapper;

@@ -1,4 +1,5 @@
 package JavaApi1.demo.repos.members;
+
 import JavaApi1.demo.exceptions.NotFoundException;
 import JavaApi1.demo.model.Member;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository
 public class member_db implements member_repo {
     private static final String CREATE = """
@@ -19,7 +21,8 @@ public class member_db implements member_repo {
             """;
 
     private static final String UPDATE = """
-            UPDATE MEMBERS SET GUILD_ID = :GuildId,
+            UPDATE MEMBERS SET 
+            GUILD_ID = :GuildId,
             NICKNAME = :Nickname,
             REALNAME = :Realname,
             DATE_OF_JOIN = :Date_of_join,
