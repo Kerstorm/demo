@@ -1,6 +1,6 @@
 package JavaApi1.demo.repos.members;
 import JavaApi1.demo.exceptions.NotFoundException;
-import JavaApi1.demo.Pack.model.Member;
+import JavaApi1.demo.model.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.DataClassRowMapper;

@@ -1,6 +1,6 @@
-package JavaApi1.demo.Pack.controller;
+package JavaApi1.demo.controller;
 
-import JavaApi1.demo.Pack.model.Member;
+import JavaApi1.demo.model.Member;
 import JavaApi1.demo.repos.members.member_repo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

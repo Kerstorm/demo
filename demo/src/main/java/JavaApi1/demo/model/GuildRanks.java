@@ -1,4 +1,4 @@
-package JavaApi1.demo.Pack.model;
+package JavaApi1.demo.model;
 
 public enum GuildRanks {
     GUILD_HEAD(1),

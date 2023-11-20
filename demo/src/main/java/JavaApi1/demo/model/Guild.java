@@ -1,4 +1,4 @@
-package JavaApi1.demo.Pack.model;
+package JavaApi1.demo.model;
 
 import java.util.Date;
 

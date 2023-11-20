@@ -1,6 +1,6 @@
 package JavaApi1.demo.repos.guilds;
-import JavaApi1.demo.Pack.model.Guild;
-import JavaApi1.demo.Pack.model.Member;
+import JavaApi1.demo.model.Guild;
+import JavaApi1.demo.model.Member;
 import java.util.List;
 
 public interface guild_repo {
