@@ -24,7 +24,7 @@ public class member_db implements member_repo {
             REALNAME = :Realname,
             DATE_OF_JOIN = :Date_of_join,
             RANKS = :Ranks,
-            IS_ACTIVE = :genre.id
+            IS_ACTIVE = :Is_active
             WHERE MEMBER_ID = :MemberId
             """;
 
