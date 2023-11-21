@@ -1,9 +1,11 @@
 package JavaApi1.demo.repos.guilds;
 
 import JavaApi1.demo.exceptions.NotFoundException;
+import JavaApi1.demo.exceptions.NotUniquePrimaryKeyException;
 import JavaApi1.demo.model.Guild;
 import JavaApi1.demo.model.Member;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,14 +20,14 @@ import java.util.List;
 public class H2GuildRepo implements GuildRepo {
     private static final String CREATE = """
             INSERT IntegerO GUILDS (GUILD_ID, TITLE, CREATE_DATE, COUNT_MEMBERS, PVP)
-            VALUES (:guildId, :title, :createDate, :countMembers, :PvP)
+            VALUES (:guildId, :title, :createDate, :countMembers, :pvp)
             """;
 
     private static final String UPDATE = """
             UPDATE GUILDS SET TITLE = :title,
             CREATE_DATE = :createDate,
             COUNT_MEMBERS = :countMembers,
-            PVP = :PvP
+            PVP = :pvp
             WHERE GUILD_ID = :guildId
             """;
 
@@ -62,8 +64,12 @@ public class H2GuildRepo implements GuildRepo {
 
     @Override
     public void createGuild(Guild guild) {
-        BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(guild);
-        namedParameterJdbcTemplate.update(CREATE, parameterSource);
+        try {
+            BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(guild);
+            namedParameterJdbcTemplate.update(CREATE, parameterSource);
+        } catch (DuplicateKeyException e) {
+            throw new NotUniquePrimaryKeyException("Такая гильдия уже существует" + guild.guildId(), e);
+        }
     }
 
     @Override

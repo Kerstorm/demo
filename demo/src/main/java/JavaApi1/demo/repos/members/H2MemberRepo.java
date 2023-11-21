@@ -1,8 +1,10 @@
 package JavaApi1.demo.repos.members;
 
 import JavaApi1.demo.exceptions.NotFoundException;
+import JavaApi1.demo.exceptions.NotUniquePrimaryKeyException;
 import JavaApi1.demo.model.Member;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,7 +23,7 @@ public class H2MemberRepo implements MemberRepo {
             """;
 
     private static final String UPDATE = """
-            UPDATE MEMBERS SET 
+            UPDATE MEMBERS SET
             GUILD_ID = :guildId,
             NICKNAME = :nickname,
             REALNAME = :realname,
@@ -55,8 +57,13 @@ public class H2MemberRepo implements MemberRepo {
     }
 
     public void createMember(Member member) {
-        BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(member);
-        namedParameterJdbcTemplate.update(CREATE, parameterSource);
+        try {
+            BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(member);
+            namedParameterJdbcTemplate.update(CREATE, parameterSource);
+        }
+        catch (DuplicateKeyException e) {
+            throw new NotUniquePrimaryKeyException("Такой мембер уже существует" + member.memberId(), e);
+        }
     }
 
     public void updateMember(Member member, Integer memberId) {
