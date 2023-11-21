@@ -18,15 +18,15 @@ import java.util.List;
 public class H2GuildRepo implements GuildRepo {
     private static final String CREATE = """
             INSERT INTO GUILDS (GUILD_ID, TITLE, CREATE_DATE, COUNT_MEMBERS, PVP)
-            VALUES (:GuildId, :Title, :Create_date, :Count_members, :PvP)
+            VALUES (:guildId, :title, :createDate, :countMembers, :PvP)
             """;
 
     private static final String UPDATE = """
-            UPDATE GUILDS SET TITLE = :Title,
-            CREATE_DATE = :Create_date,
-            COUNT_MEMBERS = :Count_members,
+            UPDATE GUILDS SET TITLE = :title,
+            CREATE_DATE = :createDate,
+            COUNT_MEMBERS = :countMembers,
             PVP = :PvP
-            WHERE GUILD_ID = :GuildId
+            WHERE GUILD_ID = :guildId
             """;
 
     private final RowMapper<Guild> rowMapper = new DataClassRowMapper<>(Guild.class);

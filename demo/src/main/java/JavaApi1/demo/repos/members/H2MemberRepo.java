@@ -17,18 +17,18 @@ import java.util.List;
 public class H2MemberRepo implements MemberRepo {
     private static final String CREATE = """
             INSERT INTO MEMBERS (MEMBER_ID, GUILD_ID, NICKNAME, REALNAME, DATE_OF_JOIN, RANKS, IS_ACTIVE)
-            VALUES (:MemberId, :GuildId, :Nickname, :Realname, :Date_of_join, :Ranks, :Is_active)
+            VALUES (:memberId, :guildId, :nickname, :realname, :dateOfJoin, :ranks, :isActive)
             """;
 
     private static final String UPDATE = """
             UPDATE MEMBERS SET 
-            GUILD_ID = :GuildId,
-            NICKNAME = :Nickname,
-            REALNAME = :Realname,
-            DATE_OF_JOIN = :Date_of_join,
-            RANKS = :Ranks,
-            IS_ACTIVE = :Is_active
-            WHERE MEMBER_ID = :MemberId
+            GUILD_ID = :guildId,
+            NICKNAME = :nickname,
+            REALNAME = :realname,
+            DATE_OF_JOIN = :dateOfJoin,
+            RANKS = :ranks,
+            IS_ACTIVE = :isActive
+            WHERE MEMBER_ID = :memberId
             """;
 
     private final RowMapper<Member> rowMapper = new DataClassRowMapper<>(Member.class);
