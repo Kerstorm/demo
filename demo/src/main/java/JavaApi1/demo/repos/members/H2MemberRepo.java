@@ -62,7 +62,7 @@ public class H2MemberRepo implements MemberRepo {
             namedParameterJdbcTemplate.update(CREATE, parameterSource);
         }
         catch (DuplicateKeyException e) {
-            throw new NotUniquePrimaryKeyException("Такой мембер уже существует" + member.memberId(), e);
+            throw new NotUniquePrimaryKeyException("Такой член гильдии уже существует" + member.memberId(), e);
         }
     }
 
