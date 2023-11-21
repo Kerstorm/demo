@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class member_db implements member_repo {
+public class H2MemberRepo implements MemberRepo {
     private static final String CREATE = """
             INSERT INTO MEMBERS (MEMBER_ID, GUILD_ID, NICKNAME, REALNAME, DATE_OF_JOIN, RANKS, IS_ACTIVE)
             VALUES (:MemberId, :GuildId, :Nickname, :Realname, :Date_of_join, :Ranks, :Is_active)
@@ -37,7 +37,7 @@ public class member_db implements member_repo {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Autowired
-    public member_db(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+    public H2MemberRepo(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }

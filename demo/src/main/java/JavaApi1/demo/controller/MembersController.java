@@ -1,7 +1,7 @@
 package JavaApi1.demo.controller;
 
 import JavaApi1.demo.model.Member;
-import JavaApi1.demo.repos.members.member_repo;
+import JavaApi1.demo.repos.members.MemberRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +12,10 @@ import java.util.List;
 @RestController
 @RequestMapping("api/members")
 public class MembersController {
-    private final member_repo repository;
+    private final MemberRepo repository;
 
     @Autowired
-    public MembersController(member_repo repository) throws ParseException {
+    public MembersController(MemberRepo repository) throws ParseException {
         this.repository = repository;
     }
 

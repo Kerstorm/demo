@@ -4,7 +4,7 @@ import JavaApi1.demo.model.Member;
 
 import java.util.List;
 
-public interface member_repo {
+public interface MemberRepo {
     List<Member> getMember();
 
     Member getMember(int memberId);

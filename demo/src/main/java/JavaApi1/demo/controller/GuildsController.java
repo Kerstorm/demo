@@ -2,7 +2,7 @@ package JavaApi1.demo.controller;
 
 import JavaApi1.demo.model.Guild;
 import JavaApi1.demo.model.Member;
-import JavaApi1.demo.repos.guilds.guild_db;
+import JavaApi1.demo.repos.guilds.H2GuildRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +13,10 @@ import java.util.List;
 @RestController
 @RequestMapping("api/guilds")
 public class GuildsController {
-    private final guild_db repository;
+    private final H2GuildRepo repository;
 
     @Autowired
-    public GuildsController(guild_db repository) throws ParseException {
+    public GuildsController(H2GuildRepo repository) throws ParseException {
         this.repository = repository;
     }
 
