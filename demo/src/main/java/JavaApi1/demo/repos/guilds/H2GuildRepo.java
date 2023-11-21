@@ -17,7 +17,7 @@ import java.util.List;
 @Repository
 public class H2GuildRepo implements GuildRepo {
     private static final String CREATE = """
-            INSERT INTO GUILDS (GUILD_ID, TITLE, CREATE_DATE, COUNT_MEMBERS, PVP)
+            INSERT IntegerO GUILDS (GUILD_ID, TITLE, CREATE_DATE, COUNT_MEMBERS, PVP)
             VALUES (:guildId, :title, :createDate, :countMembers, :PvP)
             """;
 
@@ -47,7 +47,7 @@ public class H2GuildRepo implements GuildRepo {
     }
 
     @Override
-    public Guild getGuild(int guildId) {
+    public Guild getGuild(Integer guildId) {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM GUILDS WHERE GUILD_ID = ?", rowMapper, guildId);
         } catch (EmptyResultDataAccessException e) {
@@ -56,7 +56,7 @@ public class H2GuildRepo implements GuildRepo {
     }
 
     @Override
-    public List<Member> getMemberByGuildId(int guildId) {
+    public List<Member> getMemberByGuildId(Integer guildId) {
         return jdbcTemplate.query("SELECT * FROM MEMBERS WHERE GUILD_ID = ?", MemberRowMapper, guildId);
     }
 
@@ -67,13 +67,13 @@ public class H2GuildRepo implements GuildRepo {
     }
 
     @Override
-    public void updateGuild(Guild guild, int guildId) {
+    public void updateGuild(Guild guild, Integer guildId) {
         BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(guild);
         namedParameterJdbcTemplate.update(UPDATE, parameterSource);
     }
 
     @Override
-    public void deleteGuild(int guildId) {
+    public void deleteGuild(Integer guildId) {
         jdbcTemplate.update("DELETE FROM GUILDS WHERE GUILD_ID =?", guildId);
     }
 }

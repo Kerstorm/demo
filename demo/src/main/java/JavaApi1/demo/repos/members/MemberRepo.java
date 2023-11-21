@@ -7,11 +7,11 @@ import java.util.List;
 public interface MemberRepo {
     List<Member> getMember();
 
-    Member getMember(int memberId);
+    Member getMember(Integer memberId);
 
     void createMember(Member member);
 
-    void updateMember(Member member, int memberId);
+    void updateMember(Member member, Integer memberId);
 
-    void deleteMember(int memberId);
+    void deleteMember(Integer memberId);
 }

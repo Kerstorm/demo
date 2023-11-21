@@ -16,7 +16,7 @@ import java.util.List;
 @Repository
 public class H2MemberRepo implements MemberRepo {
     private static final String CREATE = """
-            INSERT INTO MEMBERS (MEMBER_ID, GUILD_ID, NICKNAME, REALNAME, DATE_OF_JOIN, RANKS, IS_ACTIVE)
+            INSERT IntegerO MEMBERS (MEMBER_ID, GUILD_ID, NICKNAME, REALNAME, DATE_OF_JOIN, RANKS, IS_ACTIVE)
             VALUES (:memberId, :guildId, :nickname, :realname, :dateOfJoin, :ranks, :isActive)
             """;
 
@@ -46,7 +46,7 @@ public class H2MemberRepo implements MemberRepo {
         return jdbcTemplate.query("SELECT * FROM MEMBERS", rowMapper);
     }
 
-    public Member getMember(int memberId) {
+    public Member getMember(Integer memberId) {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM MEMBERS WHERE MEMBER_ID = ?", rowMapper, memberId);
         } catch (EmptyResultDataAccessException e) {
@@ -59,12 +59,12 @@ public class H2MemberRepo implements MemberRepo {
         namedParameterJdbcTemplate.update(CREATE, parameterSource);
     }
 
-    public void updateMember(Member member, int memberId) {
+    public void updateMember(Member member, Integer memberId) {
         BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(member);
         namedParameterJdbcTemplate.update(UPDATE, parameterSource);
     }
 
-    public void deleteMember(int memberId) {
+    public void deleteMember(Integer memberId) {
         jdbcTemplate.update("DELETE FROM MEMBERS WHERE MEMBER_ID = ?", memberId);
     }
 }

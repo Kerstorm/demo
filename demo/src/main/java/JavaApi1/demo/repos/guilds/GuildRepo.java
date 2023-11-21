@@ -6,13 +6,13 @@ import java.util.List;
 public interface GuildRepo {
     List<Guild> getGuild();
 
-    Guild getGuild(int guildId);
+    Guild getGuild(Integer guildId);
 
-    List<Member> getMemberByGuildId(int guildId);
+    List<Member> getMemberByGuildId(Integer guildId);
 
     void createGuild(Guild guild);
 
-    void updateGuild(Guild guild, int guildId);
+    void updateGuild(Guild guild, Integer guildId);
 
-    void deleteGuild(int guildId);
+    void deleteGuild(Integer guildId);
 }
