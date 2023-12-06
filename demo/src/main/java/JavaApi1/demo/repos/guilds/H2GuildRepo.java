@@ -19,7 +19,7 @@ import java.util.List;
 @Repository
 public class H2GuildRepo implements GuildRepo {
     private static final String CREATE = """
-            INSERT IntegerO GUILDS (GUILD_ID, TITLE, CREATE_DATE, COUNT_MEMBERS, PVP)
+            INSERT INTO GUILDS (GUILD_ID, TITLE, CREATE_DATE, COUNT_MEMBERS, PVP)
             VALUES (:guildId, :title, :createDate, :countMembers, :pvp)
             """;
 

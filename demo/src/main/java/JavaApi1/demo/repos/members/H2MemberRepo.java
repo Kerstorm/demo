@@ -18,7 +18,7 @@ import java.util.List;
 @Repository
 public class H2MemberRepo implements MemberRepo {
     private static final String CREATE = """
-            INSERT IntegerO MEMBERS (MEMBER_ID, GUILD_ID, NICKNAME, REALNAME, DATE_OF_JOIN, RANKS, IS_ACTIVE)
+            INSERT INTO MEMBERS (MEMBER_ID, GUILD_ID, NICKNAME, REALNAME, DATE_OF_JOIN, RANKS, IS_ACTIVE)
             VALUES (:memberId, :guildId, :nickname, :realname, :dateOfJoin, :ranks, :isActive)
             """;
 
